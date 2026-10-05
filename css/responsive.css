@@ -1,0 +1,10 @@
+/* =====================================================
+   RESPONSIVE : adaptation aux petits écrans (tablette / téléphone)
+   ===================================================== */
+@media (max-width: 760px) {
+  .hero { padding: 3rem 0; }
+
+  /* Compétences et timeline passent sur UNE colonne (titre au-dessus du texte) */
+  dl.skills, .timeline li { grid-template-columns: 1fr; gap: .2rem; }
+  dl.skills dd { margin-bottom: .8rem; }
+}

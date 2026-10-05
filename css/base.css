@@ -1,0 +1,27 @@
+/* =====================================================
+   BASE : réglages généraux appliqués à toute la page
+   ===================================================== */
+
+/* box-sizing: les largeurs incluent padding et bordure (beaucoup plus intuitif) */
+* { box-sizing: border-box; }
+
+/* Défilement fluide quand on clique sur un lien d'ancre (#about...) */
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 1.0625rem/1.7 var(--body); /* graisse / taille / hauteur de ligne / police */
+  -webkit-font-smoothing: antialiased;  /* texte plus net sur Mac */
+  overflow-x: hidden;                   /* évite un scroll horizontal parasite */
+}
+
+a { color: var(--blue); text-underline-offset: 3px; }
+
+/* Contour doré visible quand on navigue au clavier (accessibilité) */
+a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}

@@ -1,0 +1,57 @@
+/* =====================================================
+   LAYOUT : la mise en page (où sont placés les gros blocs)
+   ===================================================== */
+
+/* Conteneur centré. z-index:1 => passe au-dessus du canvas de fond (z-index:0) */
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Canvas du fond animé : fixe, derrière tout, les clics le traversent */
+#bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ----- En-tête ----- */
+header.top {
+  display: flex;
+  justify-content: space-between; /* nom à gauche, menu à droite */
+  align-items: center;
+  padding: 1.25rem 0;
+  gap: 1rem;
+  flex-wrap: wrap;                /* passe à la ligne si trop étroit */
+}
+header.top strong { font: 800 1.1rem var(--head); }
+.right { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+
+/* ----- Hero (grand bloc d'accueil) ----- */
+.hero { padding: 5rem 0 4.5rem; }
+.hero h1 {
+  /* clamp(min, idéal, max) : le titre s'adapte à la largeur de l'écran */
+  font: 800 clamp(3rem, 10vw, 6.5rem)/.98 var(--head);
+  margin: 0 0 1.5rem;
+  letter-spacing: -.03em;
+}
+.lead { font-size: 1.25rem; max-width: 36rem; margin: 0 0 2rem; color: var(--muted); }
+.btns { display: flex; gap: .75rem; flex-wrap: wrap; }
+
+/* ----- Sections ----- */
+section { padding: 3.25rem 0; border-top: 1px solid var(--line); }
+h2 { font: 800 1.9rem/1.2 var(--head); margin: 0 0 1.5rem; letter-spacing: -.01em; }
+section p { max-width: 44rem; margin: 0 0 1rem; } /* lignes pas trop longues = plus lisible */
+
+/* ----- Pied de page ----- */
+footer {
+  padding: 2rem 0 3rem;
+  color: var(--muted);
+  font-size: .9rem;
+  border-top: 1px solid var(--line);
+}

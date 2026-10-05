@@ -1,0 +1,24 @@
+/* =====================================================
+   VARIABLES : couleurs, polices, tailles globales.
+   Pour changer l'apparence de TOUT le site, modifie ici.
+   Dans les autres fichiers, on les utilise avec var(--nom).
+   ===================================================== */
+:root {
+  --bg: #10131E;      /* fond de la page */
+  --ink: #E7E9F1;     /* texte principal */
+  --muted: #98A1B8;   /* texte secondaire (gris-bleu) */
+  --line: #262C42;    /* traits fins, bordures */
+  --blue: #7C9BFF;   /* liens */
+  --gold: #E8B063;   /* couleur d'accent (boutons, dates, survol) */
+
+  /* Fonds semi-transparents (pour qu'on voie un peu le fond animé derrière) */
+  --glass: rgba(16, 19, 30, .65);
+  --glass-strong: rgba(16, 19, 30, .88);
+
+  /* Polices : la première est utilisée, les suivantes servent de secours */
+  --head: "Bricolage Grotesque", "Trebuchet MS", Arial, sans-serif;
+  --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+
+  /* Largeur maximale du contenu */
+  --page-width: 62rem;
+}

@@ -1,0 +1,124 @@
+/* =====================================================
+   COMPONENTS : les petits éléments réutilisables
+   ===================================================== */
+
+/* ----- Menu de navigation (soulignement doré animé au survol) ----- */
+nav a {
+  margin-right: 1rem;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+  /* Astuce : un dégradé uni de largeur 0 en bas du lien, qui s'élargit au survol */
+  background: linear-gradient(var(--gold), var(--gold)) 0 100% / 0 2px no-repeat;
+  transition: background-size .25s;
+  padding-bottom: 2px;
+}
+nav a:hover { background-size: 100% 2px; }
+
+/* ----- Boutons de langue et de son ----- */
+.lang, .snd {
+  border: 1.5px solid var(--muted);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.lang { display: flex; }
+.lang button, .snd {
+  font: 600 .85rem var(--body);
+  background: transparent;
+  color: var(--ink);
+  padding: .3rem .65rem;
+  cursor: pointer;
+}
+.lang button { border: 0; }
+/* Bouton "actif" : couleurs inversées */
+.lang button[aria-pressed="true"], .snd[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* ----- Boutons principaux (Get in touch, LinkedIn) ----- */
+.btn {
+  display: inline-block;
+  padding: .75rem 1.3rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  transition: transform .2s;
+}
+.btn:hover { transform: translateY(-2px); }       /* petit saut au survol */
+.btn.primary { background: var(--gold); border-color: var(--gold); color: #1A1405; }
+
+/* ----- Compétences : grille 2 colonnes (titre | contenu) ----- */
+dl.skills { display: grid; grid-template-columns: 11rem 1fr; gap: .9rem 1.5rem; margin: 0; }
+dl.skills dt { font-weight: 600; }
+dl.skills dd { margin: 0; color: var(--muted); }
+
+/* ----- Timeline de formation (date | description) ----- */
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
+.timeline li { display: grid; grid-template-columns: 8rem 1fr; gap: 1.5rem; }
+.date { color: var(--gold); font-weight: 500; }
+
+/* ----- Encadré avec barre dorée à gauche ----- */
+.note { border-left: 3px solid var(--gold); padding-left: 1.25rem; color: var(--muted); }
+
+/* ----- Oscilloscope ----- */
+#scope {
+  display: block;
+  width: 100%;
+  max-width: 44rem;
+  height: 96px;
+  margin-top: 2.75rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--glass);
+}
+.cap { margin: .6rem 0 0; font-size: .85rem; color: var(--muted); }
+
+/* ----- Bouton "retour en haut" ----- */
+.totop {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 5;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1.5px solid var(--muted);
+  background: var(--glass-strong);
+  color: var(--ink);
+  font: 600 1.25rem var(--body);
+  cursor: pointer;
+  /* Caché par défaut ; la classe .show (ajoutée par ui.js) le fait apparaître */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity .3s, transform .3s, visibility .3s, border-color .2s, color .2s;
+}
+.totop.show { opacity: 1; visibility: visible; transform: none; }
+.totop:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ----- Cartes de projets (générées par js/modules/projects.js) ----- */
+.projects {
+  display: grid;
+  gap: 1.25rem;
+  /* Autant de colonnes que possible, chacune d'au moins 16rem */
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+.project {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1.25rem;
+  background: var(--glass);
+}
+.project h3 { font: 800 1.2rem/1.3 var(--head); margin: 0 0 .5rem; }
+.project p { margin: 0 0 .75rem; color: var(--muted); }
+.tags { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 .75rem; padding: 0; }
+.tags li {
+  font-size: .8rem;
+  color: var(--gold);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: .1rem .6rem;
+}
