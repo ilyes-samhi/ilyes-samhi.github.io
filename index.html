@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Ilyes Samhi – Microelectronics & Automation student</title>
+<meta name="description" content="Portfolio of Ilyes Samhi, engineering student in Microelectronics and Automation at Polytech Montpellier.">
+
+<!-- Polices Google (Bricolage Grotesque pour les titres, Instrument Sans pour le texte) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Ajoute la classe "js" sur <html> dès que possible.
+     Le CSS s'en sert pour n'activer les animations d'apparition que si le JS fonctionne
+     (sinon le contenu resterait invisible). -->
+<script>document.documentElement.classList.add('js')</script>
+
+<!-- ===== CSS : l'ordre compte (variables d'abord, responsive en dernier) ===== -->
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+
+<!-- ===== JS : l'ordre compte aussi ! =====
+     "defer" = le script s'exécute après le chargement de la page, en gardant cet ordre.
+     1. config + utils (utilisés par tout le monde)
+     2. data (textes, projets)
+     3. modules (le fonctionnement)
+     4. main (démarre tout) -->
+<script defer src="js/config.js"></script>
+<script defer src="js/utils.js"></script>
+<script defer src="js/data/translations.js"></script>
+<script defer src="js/data/projects.js"></script>
+<script defer src="js/modules/i18n.js"></script>
+<script defer src="js/modules/background.js"></script>
+<script defer src="js/modules/audio.js"></script>
+<script defer src="js/modules/scope.js"></script>
+<script defer src="js/modules/projects.js"></script>
+<script defer src="js/modules/ui.js"></script>
+<script defer src="js/main.js"></script>
+</head>
+
+<body>
+<!--
+  NOTE SUR LES TEXTES : les textes ci-dessous (en anglais) servent de "secours"
+  (si le JS est désactivé, pour les moteurs de recherche).
+  Dès que la page se charge, js/data/translations.js les REMPLACE.
+  => Pour modifier un texte, modifie translations.js (et ici si tu veux garder le secours à jour).
+
+  L'attribut data-i="clé" dit à i18n.js quelle traduction mettre dans l'élément.
+  L'attribut data-i-aria="clé" fait pareil mais pour l'attribut aria-label (accessibilité).
+-->
+
+<!-- Canvas du fond animé (dessiné par js/modules/background.js) -->
+<canvas id="bg" aria-hidden="true"></canvas>
+
+<!-- .wrap = le contenu centré, au-dessus du fond -->
+<div class="wrap">
+
+<!-- ===== EN-TÊTE : nom, navigation, bouton son, choix de langue ===== -->
+<header class="top">
+  <strong>Ilyes Samhi</strong>
+  <div class="right">
+    <nav data-i-aria="nav" aria-label="Main navigation">
+      <a href="#about" data-i="n_about">About</a><a href="#education" data-i="n_edu">Education</a><a href="#skills" data-i="n_skills">Skills</a><a href="#projects" data-i="n_proj">Projects</a><a href="#contact" data-i="n_contact">Contact</a>
+    </nav>
+    <!-- Son : le texte du bouton est géré par js/modules/ui.js -->
+    <button class="snd" id="snd" type="button" aria-pressed="false">♪ Sound off</button>
+    <!-- Langues : pour en ajouter une, ajoute un bouton ici (data-lang="code")
+         + un bloc dans translations.js -->
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ===== HERO : grand titre + présentation + oscilloscope =====
+       "rise" = animation d'entrée ; --d = délai avant le début de l'animation -->
+  <div class="hero">
+    <h1 class="rise" style="--d:.1s">Ilyes Samhi</h1>
+    <p class="lead rise" style="--d:.35s" data-i="lead">Engineering student in Microelectronics and Automation at Polytech Montpellier. What interests me most is microelectronics: how circuits and chips are designed, and how they make everyday devices work. I also have a strong background in chemistry, useful for understanding the materials and manufacturing behind components.</p>
+    <div class="btns rise" style="--d:.6s">
+      <a class="btn primary" href="#contact" data-i="b_contact">Get in touch</a>
+      <a class="btn" href="https://www.linkedin.com/in/ilyes-samhi/">LinkedIn</a>
+    </div>
+    <!-- Oscilloscope (dessiné par js/modules/scope.js) -->
+    <div class="rise" style="--d:.85s">
+      <canvas id="scope" aria-hidden="true"></canvas>
+      <p class="cap" data-i="scope_cap">Live audio signal. Turn on the sound to see it move.</p>
+    </div>
+  </div>
+
+  <!-- Chaque <section class="sr"> apparaît en douceur quand on scrolle ("sr" = scroll reveal) -->
+
+  <!-- ===== À PROPOS ===== -->
+  <section id="about" class="sr">
+    <h2 data-i="h_about">About</h2>
+    <p data-i="about">I spent two years in preparatory classes (CPGE, PCSI then PC), an intensive two-year undergraduate programme in mathematics, physics and chemistry that prepares for the entrance exams of French engineering schools. I did it at Lycée Aristide Briand in Évreux. I have now joined Polytech Montpellier, where I am working towards a French engineering degree (Master's level) in the MEA track (Microelectronics and Automation), with a clear interest in microelectronics.</p>
+  </section>
+
+  <!-- ===== FORMATION : pour ajouter une étape, copie un <li> =====
+       (ajoute aussi la clé de texte dans translations.js) -->
+  <section id="education" class="sr">
+    <h2 data-i="h_edu">Education</h2>
+    <ul class="timeline">
+      <li><span class="date">2026 – 2029</span><span><strong>Polytech Montpellier</strong><br><span data-i="edu1">Engineering degree (Master's level), specialisation in Electronics and Industrial Computing, MEA track: Microelectronics and Automation</span></span></li>
+      <li><span class="date">2024 – 2026</span><span><strong>Lycée Aristide Briand, Évreux</strong><br><span data-i="edu2">Preparatory classes (CPGE): intensive two-year programme in maths, physics and chemistry (PCSI, then PC)</span></span></li>
+    </ul>
+  </section>
+
+  <!-- ===== COMPÉTENCES : liste de définitions (dt = titre, dd = contenu) ===== -->
+  <section id="skills" class="sr">
+    <h2 data-i="h_skills">Skills</h2>
+    <dl class="skills">
+      <dt data-i="s1t">Interests</dt><dd data-i="s1">Microelectronics, automation, semiconductor materials, computer architecture</dd>
+      <dt data-i="s2t">Foundations</dt><dd data-i="s2">Mathematics, physics and chemistry (two years of CPGE), analytical problem solving</dd>
+      <dt data-i="s4t">Programming</dt><dd data-i="s4">Python</dd>
+      <dt data-i="s3t">Languages</dt><dd data-i="s3">French, English (fluent)</dd>
+    </dl>
+  </section>
+
+  <!-- ===== PROJETS =====
+       - #projects-list est rempli automatiquement depuis js/data/projects.js
+       - Le paragraphe "note" ne s'affiche que s'il n'y a AUCUN projet. -->
+  <section id="projects" class="sr">
+    <h2 data-i="h_proj">Projects</h2>
+    <p class="note" data-i="proj">Nothing finished to show just yet. This section will be updated very soon, so check back shortly.</p>
+    <div id="projects-list" class="projects"></div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="sr">
+    <h2 data-i="h_contact">Contact</h2>
+    <p data-i="contact">Questions, opportunities, or just want to chat? Get in touch.</p>
+    <p><a href="mailto:isamhi49@gmail.com">isamhi49@gmail.com</a><br>
+    <a href="https://www.linkedin.com/in/ilyes-samhi/">LinkedIn</a> · <a href="https://github.com/ilyes-samhi">GitHub</a></p>
+  </section>
+</main>
+
+<!-- L'année est remplie automatiquement par js/modules/ui.js -->
+<footer>© <span id="y"></span> Ilyes Samhi</footer>
+</div>
+
+<!-- Bouton "retour en haut" (apparaît quand on a scrollé, géré par ui.js) -->
+<button id="top" class="totop" type="button" data-i-aria="top" aria-label="Back to top">↑</button>
+
+</body>
+</html>
