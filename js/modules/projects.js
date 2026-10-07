@@ -25,6 +25,14 @@
       var card = document.createElement('article');
       card.className = 'project';
 
+      if (p.image) {
+        var img = document.createElement('img');
+        img.src = p.image;
+        img.alt = p.imageAlt ? pick(p.imageAlt) : '';
+        img.loading = 'lazy';
+        card.appendChild(img);
+      }
+
       var title = document.createElement('h3');
       title.textContent = pick(p.title);
       card.appendChild(title);
