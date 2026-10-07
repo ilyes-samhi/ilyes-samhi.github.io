@@ -103,8 +103,8 @@ dl.skills dd { margin: 0; color: var(--muted); }
 .projects {
   display: grid;
   gap: 1.25rem;
-  /* Autant de colonnes que possible, chacune d'au moins 16rem */
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  /* Autant de colonnes que possible (auto-fill : une carte seule ne s'étire pas sur toute la largeur) */
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
 }
 .project {
   border: 1px solid var(--line);
@@ -121,4 +121,12 @@ dl.skills dd { margin: 0; color: var(--muted); }
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: .1rem .6rem;
+}
+.project img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 0 1rem;
+  border-radius: 6px;
+  background: #000;   /* le GIF a un fond noir de terminal */
 }
