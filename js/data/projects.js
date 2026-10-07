@@ -13,8 +13,8 @@ window.App.projectsData = [
   {
     title: "Enhanced spinning donut",
     description: {
-      en: "3D shapes (torus, cube, möbius strip, sphere) rendered in ASCII in the terminal, with morphing, a moving light and a hand-made z-buffer. Pure Python + NumPy, no graphics library.",
-      fr: "Formes 3D (tore, cube, ruban de Möbius, sphère) rendues en ASCII dans le terminal, avec morphing, lumière mobile et z-buffer maison. Python + NumPy uniquement, aucune bibliothèque graphique."
+      en: "Messing around with 3D ASCII graphics in the terminal. Four shapes built from their parametric equations, spinning and blending into each other under a moving light. Just Python, NumPy and a bit of patience.",
+      fr: "Je bidouille de la 3D en ASCII dans le terminal. Quatre objets construits à partir de leurs équations paramétriques, qui tournent et se transforment l'un en l'autre, sous une lumière mobile. Juste Python, NumPy et un peu de patience."
     },
     image: "img/donut-spin.gif",
     imageAlt: {
@@ -24,5 +24,15 @@ window.App.projectsData = [
     tags: ["Python", "NumPy", "3D", "ASCII"],
     link: "https://github.com/otakilly/enhanced-spinning-donut/"
   },
+
+  // {
+  //   title: "Simulateur de filtre RC",
+  //   description: {
+  //     en: "Interactive Bode plot of an RC low-pass filter.",
+  //     fr: "Diagramme de Bode interactif d'un filtre RC passe-bas."
+  //   },
+  //   tags: ["JavaScript", "Signal", "Électronique"],
+  //   link: "https://github.com/ilyes-samhi/rc-filter"
+  // },
 
 ];
