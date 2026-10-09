@@ -16,7 +16,7 @@ window.App.projectsData = [
       en: "Messing around with 3D ASCII graphics in the terminal. Four shapes built from their parametric equations, spinning and blending into each other under a moving light. Just Python, NumPy and a bit of patience.",
       fr: "Je bidouille de la 3D en ASCII dans le terminal. Quatre objets construits à partir de leurs équations paramétriques, qui tournent et se transforment l'un en l'autre, sous une lumière mobile. Juste Python, NumPy et un peu de patience."
     },
-    image: "img/donut-spin.gif",
+    image: "img/donut_spin.gif",
     imageAlt: {
       en: "A spinning ASCII torus rendered in a terminal",
       fr: "Un tore ASCII en rotation dans un terminal"
