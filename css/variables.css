@@ -4,21 +4,26 @@
    Dans les autres fichiers, on les utilise avec var(--nom).
    ===================================================== */
 :root {
-  --bg: #10131E;      /* fond de la page */
-  --ink: #E7E9F1;     /* texte principal */
-  --muted: #98A1B8;   /* texte secondaire (gris-bleu) */
-  --line: #262C42;    /* traits fins, bordures */
-  --blue: #7C9BFF;   /* liens */
-  --gold: #E8B063;   /* couleur d'accent (boutons, dates, survol) */
-
-  /* Fonds semi-transparents (pour qu'on voie un peu le fond animé derrière) */
-  --glass: rgba(16, 19, 30, .65);
-  --glass-strong: rgba(16, 19, 30, .88);
+  --bg: #ECEEEA;      /* fond de la page (gris très clair, légèrement verdâtre) */
+  --ink: #1A1C1E;     /* texte principal */
+  --muted: #5B6063;   /* texte secondaire */
+  --line: #C3C8C2;    /* traits fins, bordures */
+  --link: #1F3FBF;    /* liens (bleu outremer) */
 
   /* Polices : la première est utilisée, les suivantes servent de secours */
-  --head: "Bricolage Grotesque", "Trebuchet MS", Arial, sans-serif;
-  --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --head: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "Source Serif 4", Georgia, "Times New Roman", serif;
 
   /* Largeur maximale du contenu */
   --page-width: 62rem;
+}
+
+
+/* ----- Thème sombre : posé par js/modules/ui.js (data-theme sur <html>) ----- */
+:root[data-theme="dark"] {
+  --bg: #14171A;
+  --ink: #E6E8E4;
+  --muted: #9AA09C;
+  --line: #2E3436;
+  --link: #93A8FF;
 }

@@ -2,26 +2,27 @@
    BASE : réglages généraux appliqués à toute la page
    ===================================================== */
 
-/* box-sizing: les largeurs incluent padding et bordure (beaucoup plus intuitif) */
 * { box-sizing: border-box; }
 
-/* Défilement fluide quand on clique sur un lien d'ancre (#about...) */
-html { scroll-behavior: smooth; }
+/* Défilement fluide vers les ancres, sauf si l'utilisateur a demandé moins d'animations */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
 
 body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font: 400 1.0625rem/1.7 var(--body); /* graisse / taille / hauteur de ligne / police */
-  -webkit-font-smoothing: antialiased;  /* texte plus net sur Mac */
-  overflow-x: hidden;                   /* évite un scroll horizontal parasite */
+  font: 400 1.0625rem/1.65 var(--body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-a { color: var(--blue); text-underline-offset: 3px; }
+a { color: var(--link); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
 
-/* Contour doré visible quand on navigue au clavier (accessibilité) */
+/* Contour visible quand on navigue au clavier (accessibilité) */
 a:focus-visible, button:focus-visible {
-  outline: 3px solid var(--gold);
+  outline: 2px solid var(--link);
   outline-offset: 3px;
-  border-radius: 4px;
 }

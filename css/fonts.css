@@ -1,0 +1,13 @@
+/* =====================================================
+   FONTS : polices hébergées sur le site (aucune requête vers Google).
+   Archivo (titres, interface) et Source Serif 4 (texte), sous-ensemble latin :
+   couvre le français et l'anglais. Licences : dossier fonts/.
+   ===================================================== */
+@font-face { font-family: "Archivo"; font-style: normal; font-weight: 500; font-display: swap;
+  src: url("../fonts/archivo-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Archivo"; font-style: normal; font-weight: 600; font-display: swap;
+  src: url("../fonts/archivo-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Source Serif 4"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("../fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Source Serif 4"; font-style: normal; font-weight: 600; font-display: swap;
+  src: url("../fonts/source-serif-4-latin-600-normal.woff2") format("woff2"); }

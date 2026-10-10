@@ -58,7 +58,9 @@
     // Langue mémorisée lors d'une précédente visite (sinon langue par défaut)
     var saved = null;
     try { saved = localStorage.getItem('lang'); } catch (e) {}
-    setLang(saved || defaultLang);
+    // Pas de choix mémorisé : on suit la langue du navigateur (fr si elle commence par "fr")
+    var browser = (navigator.language || '').slice(0, 2).toLowerCase();
+    setLang(saved || (translations[browser] ? browser : defaultLang));
   }
 
   App.i18n = { init: init, t: t, setLang: setLang };

@@ -4,7 +4,7 @@
    ===================================================== */
 
 // "App" est l'objet global qui regroupe tous nos modules.
-// Chaque fichier JS y ajoute sa partie (App.audio, App.scope, ...).
+// Chaque fichier JS y ajoute sa partie (App.audio, App.ui, ...).
 // Ça évite de polluer l'espace global avec des dizaines de variables.
 window.App = {};
 
@@ -17,41 +17,19 @@ App.config = {
   // Langue affichée si aucun choix n'est mémorisé ('en' ou 'fr')
   defaultLang: 'en',
 
-  // ----- Fond ASCII animé (js/modules/background.js) -----
+  // ----- Fond animé : matrice de LED (js/modules/background.js) -----
   background: {
-    cellWidth: 10,          // largeur d'une "case" de caractère (px)
-    cellHeight: 16,         // hauteur d'une case (px)
-    fontSize: 13,           // taille de police des caractères (px)
-    ramp: ' .:-+*=%#@',     // du plus "vide" au plus "plein" : l'intensité choisit le caractère
-    frameInterval: 33,      // ms entre 2 images (33 ms ≈ 30 images/seconde)
+    cell: 10,               // distance entre 2 LED (px) : plus petit = grille plus dense
+    cellSmallScreen: 14,    // idem sur petit écran (téléphone) : moins de points, moins de batterie
+    smallScreenBelow: 760,  // largeur d'écran (px) en dessous de laquelle on utilise la grille "petit écran"
+    frameInterval: 40,      // ms entre 2 images (40 ms = 25 images/seconde)
+    frameIntervalSmallScreen: 66,   // idem sur petit écran (~15 images/seconde)
 
-    // Zone centrale gardée vide pour que le texte reste lisible :
-    clearHalfWidth: 520,    // demi-largeur de la zone vide (px)
-    fadeInner: 40,          // le fondu commence X px avant le bord de cette zone...
-    fadeOuter: 230,         // ...et finit X px après (le fond apparaît progressivement)
+    centerVisibility: 0.34, // visibilité du fond au centre, sous le texte (0 = invisible, 1 = comme sur les côtés)
+    sideStart: 0.20,        // à partir de quelle fraction de la largeur (depuis le centre) le fond devient plus visible
 
-    // Couleurs : un dégradé de teinte (hue, en degrés 0-360) de gauche à droite
-    colorSlices: 12,        // nombre de "tranches" de couleur
-    levels: 6,              // nombre de niveaux de transparence
-    hueStart: 225,          // teinte de départ (225 = bleu)
-    hueRange: 170,          // de combien la teinte glisse (225+170 ≈ 395 → rose/orange)
-    saturationStart: 100,   // saturation (%) au départ...
-    saturationDrop: 24,     // ...et de combien elle baisse vers la droite
-    lightnessStart: 74,     // luminosité (%) au départ...
-    lightnessDrop: 8,       // ...et de combien elle baisse
-    maxAlpha: 0.5,          // opacité maximale des caractères (0 à 1)
-
-    // Effet de la souris
-    mouseRange: 260,        // distance (px) à laquelle la souris a un effet
-    mouseSigma: 110,        // "largeur" de la lueur (plus grand = plus étalé)
-    mouseBoost: 0.7,        // intensité ajoutée par la souris
-    mouseVisibility: 0.4,   // la souris fait apparaître le fond même dans la zone centrale
-
-    // Ondes (au clic et au rythme de la musique)
-    rippleSpeed: 340,       // vitesse de propagation (px/seconde)
-    rippleWidth: 38,        // épaisseur de l'anneau (px)
-    rippleDuration: 3,      // durée de vie (secondes)
-    rippleVisibility: 0.7   // visibilité de l'onde dans la zone centrale
+    rippleSpeed: 300,       // vitesse de l'onde au clic / sur la musique (px/seconde)
+    rippleDuration: 2.8     // durée de vie de l'onde (secondes)
   },
 
   // ----- Musique générative (js/modules/audio.js) -----
@@ -74,20 +52,9 @@ App.config = {
     ]
   },
 
-  // ----- Oscilloscope (js/modules/scope.js) -----
-  scope: {
-    samples: 900,           // nombre de points de la courbe
-    gain: 5,                // amplification du signal (pour qu'il remplisse l'écran)
-    smoothing: 0.3,         // fluidité (petit = très doux, 1 = instantané)
-    idleNoise: 0.07,        // petit bruit affiché quand le son est coupé
-    gridColor: 'rgba(124,155,255,.12)',
-    glowColor: 'rgba(200,155,216,.75)',
-    gradient: ['#7C9BFF', '#C99BD8', '#E8B063']  // couleurs de la courbe (gauche → droite)
-  },
 
   // ----- Interface (js/modules/ui.js) -----
   ui: {
-    backToTopAfter: 500,    // le bouton "↑" apparaît après X px de scroll
-    revealThreshold: 0.15   // une section apparaît quand 15 % d'elle est visible
+    backToTopAfter: 500     // le bouton "↑" apparaît après X px de scroll
   }
 };

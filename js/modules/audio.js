@@ -1,7 +1,7 @@
 /* =====================================================
    AUDIO : musique d'ambiance générée en direct (Web Audio API).
    Rien n'est un fichier mp3 : le navigateur synthétise le son avec des oscillateurs.
-   Démarre tout seul dès que le navigateur l'autorise (au plus tard au premier clic, voir autoStart).
+   Ne démarre que sur clic du bouton ♪ (jamais tout seul).
 
    Les "briques" de la musique :
    - playChord : nappe d'accord (pad) + basse, change toutes les stepsPerChord croches
@@ -19,7 +19,7 @@
   var rand = App.utils.rand;
   var STEP = 60 / cfg.bpm / 2; // durée d'une croche en secondes
 
-  var ctx, master, bus, analyser, analyserBuffer, noiseBuf, timer;
+  var ctx, master, bus, noiseBuf, timer;
   var nextT = 0;                  // moment (en s) où jouer la prochaine croche
   var step = 0;                   // compteur de croches
   var chordIdx = 0;               // accord en cours dans la progression
@@ -61,11 +61,6 @@
     master.connect(comp);
     comp.connect(ctx.destination);
 
-    // Analyseur : permet à l'oscilloscope de "lire" le signal
-    analyser = ctx.createAnalyser();
-    analyser.fftSize = 4096;
-    analyserBuffer = new Float32Array(analyser.fftSize);
-    comp.connect(analyser);
 
     // "bus" : tous les instruments y passent. Filtre passe-bas = coupe les aigus (son plus doux)
     bus = ctx.createBiquadFilter();
@@ -199,13 +194,6 @@
     }
   }
 
-  // Note jouée quand on clique sur la page (appelée par main.js)
-  function clickNote() {
-    if (!playing || !ctx) return;
-    var P = notePool();
-    pluck(P[Math.floor(Math.random() * P.length)] + 12, ctx.currentTime + 0.02, 0.1, rand(-0.4, 0.4));
-  }
-
   function start() {
     if (playing) return; // déjà lancé (évite un double démarrage)
     if (!ctx && !setup()) return;
@@ -227,48 +215,13 @@
     master.gain.setTargetAtTime(0, ctx.currentTime, 0.5); // descente douce
     // Après 2,5 s (le temps du fondu), on libère les ressources audio sauf si on a relancé entre-temps
     setTimeout(function () {
-      if (!playing && ctx === closing) { closing.close(); ctx = null; analyser = null; }
+      if (!playing && ctx === closing) { closing.close(); ctx = null; }
     }, 2500);
   }
 
   function toggle() { playing ? stop() : start(); }
 
-  // Pour l'oscilloscope : renvoie le signal actuel (tableau de valeurs -1 → 1), ou null si pas de son
-  function readWaveform() {
-    if (!playing || !analyser) return null;
-    analyser.getFloatTimeDomainData(analyserBuffer);
-    return analyserBuffer;
-  }
-
-  // ----- Démarrage automatique -----
-  // Les navigateurs interdisent le son sans geste de l'utilisateur. On essaie donc de lancer
-  // la musique tout de suite ; si le navigateur refuse, elle démarre au PREMIER clic / touche /
-  // toucher n'importe où sur la page.
-  function autoStart() {
-    var events = ['click', 'keydown', 'touchend'];
-
-    function cleanup() {
-      events.forEach(function (ev) { document.removeEventListener(ev, onGesture); });
-    }
-
-    function onGesture(e) {
-      // Touche clavier sur le bouton son : on laisse le bouton gérer (sinon il couperait aussitôt)
-      if (e.type === 'keydown' && e.target.closest && e.target.closest('#snd')) return;
-      cleanup();
-      start();
-    }
-    events.forEach(function (ev) { document.addEventListener(ev, onGesture); });
-
-    // Tentative immédiate (marche si le navigateur autorise l'autoplay pour ce site)
-    if (setup()) {
-      ctx.resume().then(function () {
-        if (ctx && ctx.state === 'running' && !playing) { cleanup(); start(); }
-      }).catch(function () {});
-    }
-  }
-
   function init() {
-    autoStart();
     // Onglet caché : on met le son en pause pour ne pas déranger ni consommer inutilement
     document.addEventListener('visibilitychange', function () {
       if (!ctx || !playing) return;
@@ -279,9 +232,7 @@
   App.audio = {
     init: init,
     toggle: toggle,
-    isPlaying: function () { return playing; },
-    clickNote: clickNote,
-    readWaveform: readWaveform
+    isPlaying: function () { return playing; }
   };
 
 })(window.App);

@@ -2,9 +2,15 @@
    RESPONSIVE : adaptation aux petits écrans (tablette / téléphone)
    ===================================================== */
 @media (max-width: 760px) {
-  .hero { padding: 3rem 0; }
+  .hero { padding: 2.8rem 0 3.2rem; }
+  .hero h1 { font-size: clamp(2.25rem, 10vw, 3.2rem); }
+  .lead { font-size: 1.02rem; }
+  header.top { align-items: flex-start; }
+  .right { gap: .8rem; }
+  #contact > p:last-child a { margin: 0 .35rem; }
 
-  /* Compétences et timeline passent sur UNE colonne (titre au-dessus du texte) */
-  dl.skills, .timeline li { grid-template-columns: 1fr; gap: .2rem; }
-  dl.skills dd { margin-bottom: .8rem; }
+  .timeline li { grid-template-columns: 1fr; gap: .1rem; }
+  .project:has(> .media) { grid-template-columns: 1fr; grid-template-rows: none; }
+  .project:has(> .media) > .media { grid-row: auto; margin-bottom: 1rem; }
+  .project:has(> .media) > :not(.media) { grid-column: 1; }
 }
